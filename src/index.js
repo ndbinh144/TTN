@@ -12,7 +12,7 @@ const App = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/" component={Post}/>
+        <Route path="/post/:userID" component={Post}/>
       </Switch>
     </Suspense>
   </Router>
