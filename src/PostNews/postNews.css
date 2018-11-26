@@ -11,7 +11,6 @@
 .logo {
     width: 120px;
     height: 31px;
-    background: #1E90FF;
     margin: 16px 24px 16px 0;
     float: left;
   }
@@ -62,10 +61,6 @@
     line-height: 160px;
     background: #1E90FF;
     overflow: hidden;
-  }
-  
-  .ant-carousel .slick-slide h3 {
-    color: #fff;
   }
   .imgPost {
       float: left;

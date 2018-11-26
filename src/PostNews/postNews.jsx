@@ -10,7 +10,9 @@ export default class postNews extends Component {
       return (
         <Layout className="layout">
         <Header className="header">
-          <div className="logo" />
+          <div>
+            <img src={ require('../Images/logo.png') }  className="logo" alt="Logo"/>
+          </div>
           <Menu
             className="navbar"
             mode="horizontal"
@@ -49,13 +51,14 @@ export default class postNews extends Component {
                 <div className="titleNewfeed">
                     <b><u> Tin đã đăng</u></b>
                 </div>
+
                 <Card className="newfeed">
                 <div className="imgPost">
                     <Carousel autoplay >
-                        <img src="src\Images\a1.jpg" alt="Anh nha 1"/>
-                        <div><img src="./Images/a2.jpg" alt="Anh nha 2"/></div>
-                        <div><img src="./Images/a3.jpg" alt="Anh nha 3"/></div>
-                        <div><img src="./Images/a4.jpg" alt="Anh nha 4"/></div>
+                        <img src={ require('../Images/a1.jpg') } alt="Images1"/>
+                        <img src={ require('../Images/a2.jpg') } alt="Images2"/>
+                        <img src={ require('../Images/a3.jpg') } alt="Images3"/>
+                        <img src={ require('../Images/a4.jpg') } alt="Images4"/>                        
                     </Carousel>
                 </div>
                 <div className="icons">
@@ -84,10 +87,10 @@ export default class postNews extends Component {
                 <Card className="newfeed">
                 <div className="imgPost">
                     <Carousel autoplay >
-                        <img src="src\Images\a1.jpg" alt="Anh nha 1"/>
-                        <div><img src="./Images/a2.jpg" alt="Anh nha 2"/></div>
-                        <div><img src="./Images/a3.jpg" alt="Anh nha 3"/></div>
-                        <div><img src="./Images/a4.jpg" alt="Anh nha 4"/></div>
+                        <img src={ require('../Images/a1.jpg') } alt="Images1"/>
+                        <img src={ require('../Images/a2.jpg') } alt="Images2"/>
+                        <img src={ require('../Images/a3.jpg') } alt="Images3"/>
+                        <img src={ require('../Images/a4.jpg') } alt="Images4"/>                        
                     </Carousel>
                 </div>
                 <div className="icons">
@@ -116,10 +119,10 @@ export default class postNews extends Component {
                 <Card className="newfeed">
                 <div className="imgPost">
                     <Carousel autoplay >
-                        <img src="src\Images\a1.jpg" alt="Anh nha 1"/>
-                        <div><img src="./Images/a2.jpg" alt="Anh nha 2"/></div>
-                        <div><img src="./Images/a3.jpg" alt="Anh nha 3"/></div>
-                        <div><img src="./Images/a4.jpg" alt="Anh nha 4"/></div>
+                        <img src={ require('../Images/a1.jpg') } alt="Images1"/>
+                        <img src={ require('../Images/a2.jpg') } alt="Images2"/>
+                        <img src={ require('../Images/a3.jpg') } alt="Images3"/>
+                        <img src={ require('../Images/a4.jpg') } alt="Images4"/>                        
                     </Carousel>
                 </div>
                 <div className="icons">
@@ -144,6 +147,7 @@ export default class postNews extends Component {
                     Mô tả: Nhà cho thuê cao cấp. Gần siêu thị, trường học. Giá cả hợp lý.
                 </div>
                 </Card>
+                
             </Card>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
