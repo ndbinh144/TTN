@@ -1,0 +1,47 @@
+.layout {
+    background: #FFF;
+    width: 1000px;
+}
+.header {
+    background: #CFCFCF;
+}
+.navbar {
+    background: #CFCFCF;
+}
+.logo {
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
+.menuItem {
+    float: right;
+}
+.menuButton {
+    float: right;
+    margin-top: 20px;
+}
+.formPost {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.titlePost {
+    margin-bottom: 30px;
+}
+.input {
+    float: right;
+    width: 500px;
+}
+.titleInput {
+    float: left;
+}
+.padding_top_10 {
+    padding-top: 50px;
+    float: none;
+}
+.uploadImages {
+    margin-top: 50px;
+}
+.buttonPost {
+    float: right;
+}

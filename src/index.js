@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Home = lazy(() => import('./FindRoom/findRoom'));
 const Newfeed = lazy(() => import('./Newfeed/newfeed'));
+const Post = lazy(() => import('./PostNews/postNews'));
+
 
 const App = () => (
   <Router>
@@ -13,6 +15,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/newfeed/:userID" component={Newfeed}/>
+        <Route path="/post/:userID" component={Post}/>
       </Switch>
     </Suspense>
   </Router>

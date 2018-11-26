@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './newfeed.css'
 import { Layout, Menu, Button, Card, Avatar, Carousel, Icon } from 'antd';
+import { Link } from 'react-router-dom'
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -25,10 +27,10 @@ export default class newfeed extends Component {
             <Menu.Item className="menuItem">
                 <Button size='small'><b>Đăng Nhập</b></Button>
             </Menu.Item>
-            <Menu.Item key="4" className="menuItem">Cá Nhân</Menu.Item>
+            <Menu.Item key="4" className="menuItem"><Link to="/newfeed/1">Cá Nhân</Link></Menu.Item>
             <Menu.Item key="3" className="menuItem">Hướng Dẫn</Menu.Item>
             <Menu.Item key="2" className="menuItem">Tìm Kiếm</Menu.Item>
-            <Menu.Item key="1" className="menuItem">Trang Chủ</Menu.Item>
+            <Menu.Item key="1" className="menuItem"><Link to="/newfeed/1">Trang Chủ</Link></Menu.Item>           
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px' }}>
@@ -43,7 +45,7 @@ export default class newfeed extends Component {
                     </div>
                     <div className="lowButton">
                         <Button type="primary" size='small' className="buttonList">Danh sách phòng trọ</Button>
-                        <Button type="primary" size='small'>Đăng tin</Button>
+                        <Button type="primary" size='small'><Link to="/post/1">Đăng Tin</Link></Button>
                     </div>
                 </div>
             </Card>
