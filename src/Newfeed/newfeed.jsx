@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import './postNews.css'
+import './newfeed.css'
 import { Layout, Menu, Button, Card, Avatar, Carousel, Icon } from 'antd';
 
 const { Header, Content, Footer } = Layout;
 
-export default class postNews extends Component {
+export default class newfeed extends Component {
     render() {
       return (
         <Layout className="layout">

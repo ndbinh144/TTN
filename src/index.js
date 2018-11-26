@@ -5,14 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Home = lazy(() => import('./FindRoom/findRoom'));
-const Post = lazy(() => import('./PostNews/postNews'));
+const Newfeed = lazy(() => import('./Newfeed/newfeed'));
 
 const App = () => (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/post/:userID" component={Post}/>
+        <Route path="/newfeed/:userID" component={Newfeed}/>
       </Switch>
     </Suspense>
   </Router>
