@@ -13,7 +13,7 @@ const districtData = ['Quận 1','Quận 2','Quận 3','Quận 4','Quận 5','Qu
 export default class newfeed extends Component {
     render() {
       return (
-        <Layout className="layout">
+        <Layout className="layout" style={{marginLeft: 160}}>
         <Header className="header">
           <div>
             <img src={ require('../Images/logo.png') }  className="logo" alt="Logo"/>
@@ -30,10 +30,10 @@ export default class newfeed extends Component {
             <Menu.Item className="menuItem">
                 <Button size='small'><b>Đăng Nhập</b></Button>
             </Menu.Item>
-            <Menu.Item key="4" className="menuItem">Cá Nhân</Menu.Item>
+            <Menu.Item key="4" className="menuItem"><Link to="/newfeed/1">Cá Nhân</Link></Menu.Item>
             <Menu.Item key="3" className="menuItem">Hướng Dẫn</Menu.Item>
-            <Menu.Item key="2" className="menuItem">Tìm Kiếm</Menu.Item>
-            <Menu.Item key="1" className="menuItem"><Link to="/newfeed/1">Trang Chủ</Link></Menu.Item>
+            <Menu.Item key="2" className="menuItem"><Link to="/">Tìm Kiếm</Link></Menu.Item>
+            <Menu.Item key="1" className="menuItem"><Link to="/">Trang Chủ</Link></Menu.Item>  
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px' }}>
