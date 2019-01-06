@@ -11,6 +11,53 @@ const provinceData = ['An Giang','Bà Rịa-Vũng Tàu','Bạc Liêu','Bắc K�
 const districtData = ['Quận 1','Quận 2','Quận 3','Quận 4','Quận 5','Quận 6','Quận 7','Quận 8','Quận 9','Quận 10','Quận 11','Quận 12','Quận Thủ Đức','Quận Bình Thạnh','Quận Gò Vấp','Quận Phú Nhuận','Quận Tân Phú','Quận Bình Tân','Quận Tân Bình','Huyện Nhà Bè','Huyện Bình Chánh','Huyện Hóc Môn','Huyện Củ Chi','Huyện Cần Giờ'];
 
 export default class newfeed extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cityPost: "Hồ Chí Minh (TP)",
+            districtPost: "Quận 1",
+            wardsPost: "",
+            addressPost: "",
+            rentalPrice: "",
+            square: "",
+            imgPost: [],
+        };
+
+        // this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onChangeCity = this.onChangeCity.bind(this);
+        this.onChangeDistrict = this.onChangeDistrict.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+
+    onChangeCity(e) {
+        this.setState({ cityPost: e });
+    };
+
+    onChangeDistrict(e) {
+        this.setState({ districtPost: e });
+    };
+
+    onSubmit = () => {
+        var posts
+        if (localStorage.posts == null){
+            posts = [
+                this.state,
+            ]
+        }else{
+
+            posts = [
+                ...JSON.parse(localStorage.posts),
+                this.state,
+            ]
+        }
+        console.log(localStorage.posts)
+        localStorage.setItem("posts", JSON.stringify(posts));
+    };
+
     render() {
       return (
         <Layout className="layout" style={{marginLeft: 160}}>
@@ -38,15 +85,12 @@ export default class newfeed extends Component {
         </Header>
         <Content style={{ padding: '0 50px' }}>
             <Card className="formPost">
-                <div className="titlePost">
-                    Đăng tin
-                </div>
-
                 <div>
                     <p className="titleInput">Chọn tỉnh, thành phố:</p>
                     <Select className="input"
+                    name="cityPost"
                     defaultValue={provinceData[29]}
-                    onChange={this.handleProvinceChange}
+                    onChange={this.onChangeCity}
                     >
                     {provinceData.map(province => <Option key={province}>{province}</Option>)}
                     </Select>
@@ -55,7 +99,8 @@ export default class newfeed extends Component {
                 <div className="padding_top_10">
                     <p className="titleInput">Chọn quận, huyện:</p>
                     <Select className="input"
-                    onChange={this.handleProvinceChange}
+                    name="districtPost"
+                    onChange={this.onChangeDistrict}
                     >
                     {districtData.map(district => <Option key={district}>{district}</Option>)}
                     </Select>
@@ -63,22 +108,34 @@ export default class newfeed extends Component {
                 
                 <div className="padding_top_10">
                     <p className="titleInput">Chọn phường, xã, thị trấn:</p>
-                    <Input className="input" ></Input>
+                    <Input className="input" 
+                    name="wardsPost"
+                    onChange={this.onChange}
+                    ></Input>
                 </div>
 
                 <div className="padding_top_10">
                     <p className="titleInput">Số nhà, đường:</p>
-                    <Input className="input" placeholder="Số nhà cụ thể, tên đường..."></Input>
+                    <Input className="input"
+                    name="addressPost"
+                    placeholder="Số nhà cụ thể, tên đường..." 
+                    onChange={this.onChange}></Input>
                 </div>
 
                 <div className="padding_top_10">
                     <p className="titleInput">Giá cho thuê:</p>
-                    <Input className="input" placeholder="Giá cho thuê trong một tháng"></Input>
+                    <Input className="input" 
+                    name="rentalPrice"
+                    placeholder="Giá cho thuê trong một tháng" 
+                    onChange={this.onChange}></Input>
                 </div>
 
                 <div className="padding_top_10">
                     <p className="titleInput">Diện tích:</p>
-                    <Input className="input" placeholder="Diện tích phòng/nhà trọ"></Input>
+                    <Input className="input"
+                    name="square"
+                    placeholder="Diện tích phòng/nhà trọ" 
+                    onChange={this.onChange}></Input>
                     
                 </div>
                 
@@ -89,7 +146,7 @@ export default class newfeed extends Component {
                 <UploadImages/>
 
                 <div className="buttonPost">
-                    <Button type="primary"><Link to="/newfeed/1">Đăng Tin</Link></Button>
+                    <Button type="primary" onClick={this.onSubmit}><Link to="/newfeed/1">Đăng Tin</Link></Button>
                 </div>
             </Card>
         </Content>

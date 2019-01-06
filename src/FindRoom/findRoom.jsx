@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 
 const { Header, Content, Footer } = Layout;
-const FormItem = Form.Item;
+// const FormItem = Form.Item;
 const Option = Select.Option;
 
 export default class findRoom extends Component {
