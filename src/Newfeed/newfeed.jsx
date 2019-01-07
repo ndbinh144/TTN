@@ -8,7 +8,58 @@ import { Link } from 'react-router-dom'
 const { Header, Content, Footer } = Layout;
 
 export default class newfeed extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: [],            
+        }
+    }
+
+    componentWillMount() {
+        if(localStorage && localStorage.getItem('posts')){
+            var posts = JSON.parse(localStorage.getItem('posts'));
+            console.log(posts)
+            this.setState({
+                posts : posts
+            })
+        }
+    }
+
     render() {
+      var dsPosts = this.state.posts.map((post) => {
+          return (
+            <Card className="newfeed">
+                <div className="imgPost">
+                    <Carousel autoplay >
+                        <img src={ require('../Images/a1.jpg') } alt="Images1"/>
+                        <img src={ require('../Images/a2.jpg') } alt="Images2"/>
+                        <img src={ require('../Images/a3.jpg') } alt="Images3"/>
+                        <img src={ require('../Images/a4.jpg') } alt="Images4"/>                        
+                    </Carousel>
+                </div>
+                <div className="icons">
+                    <div className="titlePost">
+                        <b>{post.titlePost}</b>
+                        <div className="timePost">
+                            <text>Đã đăng vào lúc: {post.timePost}.</text>
+                        </div>
+                    </div>
+                    <Button size='small'>
+                        <Icon type="edit" />                        
+                    </Button>
+                    <Button size='small'>
+                        <Icon type="delete" />                        
+                    </Button>
+                </div>
+                <div className="contentPost">
+                    Địa chỉ: {post.addressPost} <br/>
+                    Giá thuê: {post.rentalPrice}/tháng.<br/>
+                    Diện tích: {post.square}m².<br/>
+                    <br/>
+                    Mô tả: {post.describePost}.
+                </div>
+            </Card>)
+      });
       return (
         <Layout className="layout" style={{marginLeft: 160}}>
         <Header className="header">
@@ -53,39 +104,7 @@ export default class newfeed extends Component {
                 <div className="titleNewfeed">
                     <b><u> Tin đã đăng</u></b>
                 </div>
-
-                <Card className="newfeed">
-                    <div className="imgPost">
-                        <Carousel autoplay >
-                            <img src={ require('../Images/a1.jpg') } alt="Images1"/>
-                            <img src={ require('../Images/a2.jpg') } alt="Images2"/>
-                            <img src={ require('../Images/a3.jpg') } alt="Images3"/>
-                            <img src={ require('../Images/a4.jpg') } alt="Images4"/>                        
-                        </Carousel>
-                    </div>
-                    <div className="icons">
-                        <div className="titlePost">
-                            <b>Nhà trọ lá chuối</b>
-                            <div className="timePost">
-                                <text>Đã đăng vào lúc: 9:20, 29/10/2018.</text>
-                            </div>
-                        </div>
-                        <Button size='small'>
-                            <Icon type="edit" />                        
-                        </Button>
-                        <Button size='small'>
-                            <Icon type="delete" />                        
-                        </Button>
-                    </div>
-                    <div className="contentPost">
-                        Địa chỉ: 364 Cộng Hòa, phường 4, quận Tân Bình, Tp.HCM <br/>
-                        Giá: 10 tỉ/tháng.<br/>
-                        Diện tích: 200m2.<br/>
-                        <br/>
-                        Mô tả: Nhà cho thuê cao cấp. Gần siêu thị, trường học. Giá cả hợp lý.
-                    </div>
-                </Card>
-
+                {dsPosts}
             </Card>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

@@ -4,29 +4,29 @@ import './postNews.css'
 import { Layout, Menu, Button, Card, Input, Select } from 'antd';
 import UploadImages from './../UploadImages/uploadImages';
 import { Link } from 'react-router-dom'
+import PropTypes from "prop-types";
 
 const { Header, Content, Footer } = Layout;
 const Option = Select.Option;
 const provinceData = ['An Giang','Bà Rịa-Vũng Tàu','Bạc Liêu','Bắc Kạn','Bắc Giang','Bắc Ninh','Bến Tre','Bình Dương','Bình Định','Bình Phước','Bình Thuận','Cà Mau','Cao Bằng','Cần Thơ (TP)','Đà Nẵng (TP)','Đắk Lắk','Đắk Nông','Điện Biên','Đồng Nai','Đồng Tháp','Gia Lai','Hà Giang','Hà Nam','Hà Nội (TP)','Hà Tây','Hà Tĩnh','Hải Dương','Hải Phòng (TP)','Hòa Bình','Hồ Chí Minh (TP)','Hậu Giang','Hưng Yên','Khánh Hòa','Kiên Giang','Kon Tum','Lai Châu','Lào Cai','Lạng Sơn','Lâm Đồng','Long An','Nam Định','Nghệ An','Ninh Bình','Ninh Thuận','Phú Thọ','Phú Yên','Quảng Bình','Quảng Nam','Quảng Ngãi','Quảng Ninh','Quảng Trị','Sóc Trăng','Sơn La','Tây Ninh','Thái Bình','Thái Nguyên','Thanh Hóa','Thừa Thiên - Huế','Tiền Giang','Trà Vinh','Tuyên Quang','Vĩnh Long','Vĩnh Phúc','Yên Bái'];
-const districtData = ['Quận 1','Quận 2','Quận 3','Quận 4','Quận 5','Quận 6','Quận 7','Quận 8','Quận 9','Quận 10','Quận 11','Quận 12','Quận Thủ Đức','Quận Bình Thạnh','Quận Gò Vấp','Quận Phú Nhuận','Quận Tân Phú','Quận Bình Tân','Quận Tân Bình','Huyện Nhà Bè','Huyện Bình Chánh','Huyện Hóc Môn','Huyện Củ Chi','Huyện Cần Giờ'];
 
 export default class newfeed extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props,content) {
+        super(props,content);
         this.state = {
             cityPost: "Hồ Chí Minh (TP)",
-            districtPost: "Quận 1",
-            wardsPost: "",
             addressPost: "",
+            titlePost: "",
+            describePost: "",
             rentalPrice: "",
             square: "",
             imgPost: [],
+            timePost: "",
         };
 
         // this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onChangeCity = this.onChangeCity.bind(this);
-        this.onChangeDistrict = this.onChangeDistrict.bind(this);
     }
 
     onChange(e) {
@@ -37,26 +37,30 @@ export default class newfeed extends Component {
         this.setState({ cityPost: e });
     };
 
-    onChangeDistrict(e) {
-        this.setState({ districtPost: e });
-    };
-
-    onSubmit = () => {
+    onSubmit = async () => {
+        var date = new Date().toLocaleDateString('en-GB');
+        var time = new Date().toLocaleTimeString('en-GB', { hour: "numeric", 
+        minute: "numeric"});
+        var datetime = time + ", " + date
+        await this.setState ({ timePost : datetime });
         var posts
         if (localStorage.posts == null){
             posts = [
                 this.state,
             ]
         }else{
-
             posts = [
                 ...JSON.parse(localStorage.posts),
                 this.state,
             ]
         }
-        console.log(localStorage.posts)
         localStorage.setItem("posts", JSON.stringify(posts));
+        this.context.router.history.push("/newfeed/1");
     };
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
 
     render() {
       return (
@@ -97,28 +101,26 @@ export default class newfeed extends Component {
                 </div>
 
                 <div className="padding_top_10">
-                    <p className="titleInput">Chọn quận, huyện:</p>
-                    <Select className="input"
-                    name="districtPost"
-                    onChange={this.onChangeDistrict}
-                    >
-                    {districtData.map(district => <Option key={district}>{district}</Option>)}
-                    </Select>
-                </div>
-                
-                <div className="padding_top_10">
-                    <p className="titleInput">Chọn phường, xã, thị trấn:</p>
-                    <Input className="input" 
-                    name="wardsPost"
-                    onChange={this.onChange}
-                    ></Input>
-                </div>
-
-                <div className="padding_top_10">
-                    <p className="titleInput">Số nhà, đường:</p>
+                    <p className="titleInput">Địa chỉ:</p>
                     <Input className="input"
                     name="addressPost"
                     placeholder="Số nhà cụ thể, tên đường..." 
+                    onChange={this.onChange}></Input>
+                </div>
+
+                <div className="padding_top_10">
+                    <p className="titleInput">Title:</p>
+                    <Input className="input"
+                    name="titlePost"
+                    placeholder="Nhà lá chuối..." 
+                    onChange={this.onChange}></Input>
+                </div>
+
+                <div className="padding_top_10">
+                    <p className="titleInput">Mô tả:</p>
+                    <Input className="input"
+                    name="describePost"
+                    placeholder="Chào bé Lê Văn Đạt, em còn làm ở đó không ta." 
                     onChange={this.onChange}></Input>
                 </div>
 
@@ -134,7 +136,7 @@ export default class newfeed extends Component {
                     <p className="titleInput">Diện tích:</p>
                     <Input className="input"
                     name="square"
-                    placeholder="Diện tích phòng/nhà trọ" 
+                    placeholder="Diện tích phòng/nhà trọ (m²)" 
                     onChange={this.onChange}></Input>
                     
                 </div>
@@ -146,7 +148,7 @@ export default class newfeed extends Component {
                 <UploadImages/>
 
                 <div className="buttonPost">
-                    <Button type="primary" onClick={this.onSubmit}><Link to="/newfeed/1">Đăng Tin</Link></Button>
+                    <Button type="primary" onClick={this.onSubmit}>Đăng Tin</Button>
                 </div>
             </Card>
         </Content>
